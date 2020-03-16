@@ -14,10 +14,10 @@ namespace SlutUpggiftProgrammering
             bool key = false;
             bool keycard = false;
             bool truewin = false;
-            string room = "LivingRoom";
+            string room = "Puzzle1";
             string inpt = "";
             //här skapar jag en array med alla mina room descriptions som jag tyvvär inte han skriva i detalj men de räcker för att spelet ska fungera.
-            string[] roomdesc = { "PuzzleRoom... go east, go south(keycard)", "FightRoom... take key, go north, go west"};
+            string[] roomdesc = { "PuzzleRoom... go east, go south(keycard)", "FightRoom... go fight"};
             //jag använder de finaste färgerna möjligt för min fina kod, "bluescreen blå" som bakgrund och "flashbang vit" som text
             Console.ForegroundColor = ConsoleColor.White;
             Console.BackgroundColor = ConsoleColor.Blue;
@@ -35,8 +35,8 @@ namespace SlutUpggiftProgrammering
                     if (inpt == "go east")
                     {
                         Console.Clear();
-                        Console.WriteLine("You went east into the kitchen");
-                        room = "Fightroom";
+                        Console.WriteLine("You went east into the Fightroom");
+                        room = "FightRoom";
                         //efter varje sak som händer resettar jag "inpt" så att man inte fastnar i en infinite loop av misstag
                         inpt = "";
                     }
@@ -50,11 +50,23 @@ namespace SlutUpggiftProgrammering
                 while (room == "FightRoom")
                 {
                     Console.WriteLine(roomdesc[1]);
-                    Console.ReadLine();
-                    inpt = Console.ReadLine().ToLower();
-                    //här låter jag användaren ta upp en key som låser upp både dörren ut och en drawer för att få keycardet för truewin i vault rummet
-                    FightRoom();
-
+                    int a = FightRoom();
+                    if (a == 0)
+                    {
+                        Console.WriteLine("you lost F m8");
+                    }
+                    if (a == 1)
+                    {
+                        Console.WriteLine("Good job you won!");
+                        truewin = true;
+                        room = "Exit";
+                    }
+                    if (a == 2)
+                    {
+                        Console.WriteLine("you got a draw");
+                        Console.WriteLine("I guess you won in some way so good job!");
+                        room = "Exit";
+                    }
                 }
 
                 
@@ -73,7 +85,7 @@ namespace SlutUpggiftProgrammering
                     else if (inpt == "Y")
                     {
                         truewin = false;
-                        room = "LivingRoom";
+                        room = "Puzzle1";
                         inpt = "";
                     }
                     else
@@ -96,7 +108,7 @@ namespace SlutUpggiftProgrammering
 
         }
 
-        static void FightRoom()
+        static int FightRoom()
         {
             int nameB = 0;
             int hpA = 100;
@@ -197,6 +209,7 @@ namespace SlutUpggiftProgrammering
             if (hpA > 0)
             {
                 Console.WriteLine(playerA + " wins!");
+                return 1;
             }
             if (hpB > 0)
             {
@@ -206,8 +219,10 @@ namespace SlutUpggiftProgrammering
             {
                 Console.WriteLine("Both " + playerA + " and " + playerB + " got knocked out");
                 Console.WriteLine("IT'S A DRAW!");
+                return 2;
             }
             Console.ReadKey();
+            return 0;
         }
     }
 }
