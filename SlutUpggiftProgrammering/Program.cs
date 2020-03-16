@@ -11,6 +11,7 @@ namespace SlutUpggiftProgrammering
         static void Main(string[] args)
         {
             //här skapar jag allt jag kommer behöva för att få mitt spel att fungera, t.ex mina bools för key(som leder ut och låter dig öppna en drawer för att få keycard)
+            string playerA = "";
             bool key = false;
             bool keycard = false;
             bool truewin = false;
@@ -50,7 +51,21 @@ namespace SlutUpggiftProgrammering
                 while (room == "FightRoom")
                 {
                     Console.WriteLine(roomdesc[1]);
-                    int a = FightRoom();
+                    Console.WriteLine("Enter the name of your fighter, it has to be between 1 and 15 characters.");
+                    while (true)
+                    {
+                        playerA = Console.ReadLine();
+                        if (playerA.Length < 16 && playerA.Length > 0)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("The name needs to be between 1 and 15 letters");
+                            Console.WriteLine("Try again");
+                        }
+                    }
+                    int a = FightRoom(playerA);
                     if (a == 0)
                     {
                         Console.WriteLine("you lost F m8");
@@ -108,12 +123,12 @@ namespace SlutUpggiftProgrammering
 
         }
 
-        static int FightRoom()
+        static int FightRoom(string Name)
         {
             int nameB = 0;
             int hpA = 100;
             int hpB = 100;
-            string playerA = "Aen Cover";
+            string playerA = Name;
             string playerB = "Ben Dover";
             int damage = 0;
             int round = 1;
@@ -126,20 +141,8 @@ namespace SlutUpggiftProgrammering
             Console.Clear();
 
             Console.WriteLine("CHello it me game!");
-            Console.WriteLine("Enter the name of your fighter, it has to be between 1 and 15 characters.");
-            while (true)
-            {
-                playerA = Console.ReadLine();
-                if (playerA.Length < 16 && playerA.Length > 0)
-                {
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("The name needs to be between 1 and 15 letters");
-                    Console.WriteLine("Try again");
-                }
-            }
+
+
             nameB = rand.Next(4);
             if (nameB == 2)
             {
