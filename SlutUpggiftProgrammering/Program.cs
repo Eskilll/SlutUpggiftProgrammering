@@ -17,8 +17,8 @@ namespace SlutUpggiftProgrammering
             bool truewin = false;
             string room = "Puzzle1";
             string inpt = "";
-            //här skapar jag en array med alla mina room descriptions som jag tyvvär inte han skriva i detalj men de räcker för att spelet ska fungera.
-            string[] roomdesc = { "PuzzleRoom... go east, go south(keycard)", "FightRoom... go fight"};
+            //här skapar jag en array med alla mina room descriptions.
+            string[] roomdesc = { "PuzzleRoom... go east(key,keycard), take key, take keycard(key)", "FightRoom... go fight"};
             //jag använder de finaste färgerna möjligt för min fina kod, "bluescreen blå" som bakgrund och "flashbang vit" som text
             Console.ForegroundColor = ConsoleColor.White;
             Console.BackgroundColor = ConsoleColor.Blue;
@@ -33,7 +33,7 @@ namespace SlutUpggiftProgrammering
                     Console.WriteLine(roomdesc[0]);
                     //i de här två if satserna kollar jag vad användaren skriver och ger dig en output t.ex så får du inte göra eller byter rum baserat på vilka Collectibles du har(keycard)
                     inpt = Console.ReadLine().ToLower();
-                    if (inpt == "go east")
+                    if (inpt == "go east" && key == true && keycard == true)
                     {
                         Console.Clear();
                         Console.WriteLine("You went east into the Fightroom");
@@ -41,10 +41,27 @@ namespace SlutUpggiftProgrammering
                         //efter varje sak som händer resettar jag "inpt" så att man inte fastnar i en infinite loop av misstag
                         inpt = "";
                     }
-                       
+                    else if (inpt == "take key")
+                    {
+                        Console.Clear();
+                        Console.WriteLine("You went east into the Fightroom");
+                        key = true;
+                        inpt = "";
+                    }
+                    else if (inpt == "take keycard" && key == true)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("You went east into the Fightroom");
+                        keycard = true;
+                        inpt = "";
+                    }
+                    else
+                    {
+                        Console.WriteLine("You can't do that");
+                        Console.WriteLine("Try somethinb else");
+                        inpt = "";
+                    }
 
-
-                    
 
                 }
                 //alla mina gamestates ser likadana ut förutom att varje room leder till sina egna platser och jag kommer därför bara skriva om jag gör något speciellt vid de andra gamestatsen
