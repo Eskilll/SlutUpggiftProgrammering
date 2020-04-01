@@ -44,21 +44,21 @@ namespace SlutUpggiftProgrammering
                     else if (inpt == "take key")
                     {
                         Console.Clear();
-                        Console.WriteLine("You went east into the Fightroom");
+                        Console.WriteLine("You got the key");
                         key = true;
                         inpt = "";
                     }
                     else if (inpt == "take keycard" && key == true)
                     {
                         Console.Clear();
-                        Console.WriteLine("You went east into the Fightroom");
+                        Console.WriteLine("You used your key to get the keycard");
                         keycard = true;
                         inpt = "";
                     }
                     else
                     {
                         Console.WriteLine("You can't do that");
-                        Console.WriteLine("Try somethinb else");
+                        Console.WriteLine("Try something else");
                         inpt = "";
                     }
 
@@ -87,13 +87,13 @@ namespace SlutUpggiftProgrammering
                     {
                         Console.WriteLine("you lost F m8");
                     }
-                    if (a == 1)
+                    else if (a == 1)
                     {
                         Console.WriteLine("Good job you won!");
                         truewin = true;
                         room = "Exit";
                     }
-                    if (a == 2)
+                    else if (a == 2)
                     {
                         Console.WriteLine("you got a draw");
                         Console.WriteLine("I guess you won in some way so good job!");
@@ -204,7 +204,7 @@ namespace SlutUpggiftProgrammering
                     crit = true;
                     damage = rand.Next(101);
                 }
-                if (crit == true)
+                else if (crit == true)
                 {
                     damage *= 2;
                 }
@@ -231,11 +231,11 @@ namespace SlutUpggiftProgrammering
                 Console.WriteLine(playerA + " wins!");
                 return 1;
             }
-            if (hpB > 0)
+            else if (hpB > 0)
             {
                 Console.WriteLine(playerB + " wins!");
             }
-            if (hpA < 0 && hpB < 0)
+            else if (hpA < 0 && hpB < 0)
             {
                 Console.WriteLine("Both " + playerA + " and " + playerB + " got knocked out");
                 Console.WriteLine("IT'S A DRAW!");
